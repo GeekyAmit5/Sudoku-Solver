@@ -1,2 +1,2 @@
 # Sudoku-Solver
-AI solves soduku using backtracking
+AI solves sudoku using backtracking
