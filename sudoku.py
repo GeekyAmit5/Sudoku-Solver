@@ -2,6 +2,7 @@ import time
 import pygame
 import numpy as np
 
+
 pygame.init()
 width = 500
 height = 500
@@ -15,6 +16,8 @@ yellow = (255, 255, 0)
 red = (255, 0, 0)
 green = (0, 255, 0)
 blue = (0, 0, 255)
+total = 0
+
 
 # easy
 grid = [[3, 0, 6, 5, 0, 8, 4, 0, 0],
@@ -41,8 +44,7 @@ grid = [[3, 0, 6, 5, 0, 8, 4, 0, 0],
 
 
 # generate a sudoku
-# grid=[[0 for x in range(9)]for y in range(9)]
-total = 0
+# grid = [[0 for x in range(9)]for y in range(9)]
 
 
 def isPossible(x, y, n):
@@ -67,9 +69,9 @@ def writeIt(color, x, y, n):
 
 
 def colorIt(color, x, y):
-    # pygame.time.delay(5)
-    pygame.draw.rect(win, color, (3 + y * width / column, 3 + x *
-                                  height / row, width / column - 3, height / row - 3))
+    pygame.time.delay(5)
+    pygame.draw.rect(win, color, (2 + y * width / column, 2 + x *
+                                  height / row, width / column - 2, height / row - 2))
 
 
 def solve():
@@ -88,11 +90,13 @@ def solve():
                         colorIt(red, i, j)
                         pygame.display.update()
                 return
+    drawGrid(black, row, column)
+    pygame.display.update()
     print(np.matrix(grid), "\n")
     total += 1
     print("Total :", total)
-    # time.sleep(3)
-    # exit()
+    time.sleep(1)
+    exit()
 
 
 def drawGrid(color, row, column):
@@ -118,9 +122,10 @@ def main():
     for i in range(9):
         for j in range(9):
             if grid[i][j]:
-                writeIt(blue, i, j, grid[i][j])
+                writeIt(black, i, j, grid[i][j])
     pygame.display.update()
 
 
 main()
+time.sleep(0.5)
 solve()
