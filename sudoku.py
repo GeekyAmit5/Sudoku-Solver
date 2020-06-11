@@ -69,7 +69,7 @@ def writeIt(color, x, y, n):
 
 
 def colorIt(color, x, y):
-    pygame.time.delay(5)
+    # pygame.time.delay(5)
     pygame.draw.rect(win, color, (2 + y * width / column, 2 + x *
                                   height / row, width / column - 2, height / row - 2))
 
@@ -127,5 +127,5 @@ def main():
 
 
 main()
-time.sleep(0.5)
+time.sleep(0.25)
 solve()
