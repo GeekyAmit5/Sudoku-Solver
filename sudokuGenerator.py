@@ -32,8 +32,7 @@ def solve():
         exit()
 
 
-if __name__ == "__main__":
-    num = int(input("How many Sudoku you want? "))
-    total = 0
-    grid = [[0 for x in range(9)]for y in range(9)]
-    solve()
+num = int(input("How many Sudoku you want? "))
+total = 0
+grid = [[0 for x in range(9)]for y in range(9)]
+solve()
