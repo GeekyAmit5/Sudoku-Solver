@@ -12,10 +12,8 @@ pygame.display.set_caption("Sudoku")
 win = pygame.display.set_mode((width, height))
 black = (0, 0, 0)
 white = (255, 255, 255)
-yellow = (255, 255, 0)
-red = (255, 0, 0)
-green = (0, 255, 0)
-blue = (0, 0, 255)
+red = (250, 51, 51)
+green = (51, 250, 89)
 total = 0
 
 
