@@ -65,7 +65,7 @@ def solve():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                game(1)
+                game()
 
 
 def drawGrid(color):
@@ -98,10 +98,11 @@ def load_sudoku():
         for j in range(9):
             if grid[i][j]:
                 text(str(grid[i][j]), 43+j*62, 40+i*62, black).show()
+    pygame.display.update()
 
 
-def game(level):
-    global grid
+def game():
+    global grid, active
     win.blit(bg, (0, 0))
     for i in range(9):
         for j in range(9):
@@ -115,11 +116,22 @@ def game(level):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if active:
+                    if event.key == pygame.K_BACKSPACE:
+                        num = ''
+                    else:
+                        num += event.unicode
+                        active = False
             if event.type == pygame.MOUSEBUTTONDOWN:
+                if pygame.Rect(20, 20, 560, 560).collidepoint(event.pos):
+                    active = True
+                else:
+                    active = False
                 for i in range(4):
                     if rect[i].collidepoint(pygame.mouse.get_pos()):
                         if not i:
-                            game(level)
+                            game()
                         elif i == 1:
                             solve()
                         elif i == 2:
@@ -200,6 +212,7 @@ def options():
 
 
 def difficulty():
+    global level
     win.blit(bg, (0, 0))
     for i in range(4):
         button(rect[i]).show()
@@ -215,7 +228,8 @@ def difficulty():
                         if i == 3:
                             main()
                         else:
-                            game(i)
+                            level = i
+                            game()
         Clock.tick(fps)
         pygame.display.update()
 
@@ -265,10 +279,10 @@ red = (250, 51, 51)
 black = (0, 0, 0)
 time_limit = True
 sound = True
+active = False
 fps = 10
 
 
-total = 0
 s1 = [[3, 0, 6, 5, 0, 8, 4, 0, 0],
       [5, 2, 0, 0, 0, 0, 0, 0, 0],
       [0, 8, 7, 0, 0, 0, 0, 3, 1],
@@ -290,13 +304,14 @@ s2 = [[2, 0, 0, 0, 0, 0, 5, 0, 0],
       [0, 5, 0, 6, 0, 0, 0, 1, 0]]
 
 
+num = ''
+total = 0
+level = 0
 sudoku = [s1, s2]
 grid = [[0 for x in range(9)]for y in range(9)]
 
 
 main()
-
-
 
 
 # def generateSudoku():
